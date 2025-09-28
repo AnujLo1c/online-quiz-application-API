@@ -9,6 +9,7 @@ import com.anujl.online_quiz_application.dto.response.ResponseResultDTO;
 import com.anujl.online_quiz_application.entity.OptionEntity;
 import com.anujl.online_quiz_application.entity.QuestionEntity;
 import com.anujl.online_quiz_application.entity.QuizEntity;
+import com.anujl.online_quiz_application.exception.custom.ResourceNotFoundException;
 import com.anujl.online_quiz_application.repository.QuestionRepository;
 import com.anujl.online_quiz_application.repository.QuizRepository;
 import lombok.NoArgsConstructor;
@@ -45,8 +46,8 @@ return modelMapper.map(savedQuiz, QuizResponseDTO.class);
         return quizList;
     }
 
+throw new ResourceNotFoundException("No Quiz in the DB");
 
-        //Exception
     }
 
 
@@ -71,7 +72,7 @@ List<Long> selectedOptions=requestResultDTO.getSelectedOptionIDs();
             if (question == null) continue;
 
 
-            Long correctOptionId = question.getOpitons().stream()
+            Long correctOptionId = question.getOptions().stream()
                     .filter(OptionEntity::isCorrect)
                     .map(OptionEntity::getId).findFirst()
                     .orElseThrow(() -> new IllegalStateException("Question has no correct option"));

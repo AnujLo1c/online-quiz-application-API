@@ -6,6 +6,7 @@ import com.anujl.online_quiz_application.dto.request.QuestionRequestDTO;
 import com.anujl.online_quiz_application.entity.OptionEntity;
 import com.anujl.online_quiz_application.entity.QuestionEntity;
 import com.anujl.online_quiz_application.entity.QuizEntity;
+import com.anujl.online_quiz_application.exception.custom.ResourceNotFoundException;
 import com.anujl.online_quiz_application.repository.QuestionRepository;
 import com.anujl.online_quiz_application.repository.QuizRepository;
 import jakarta.validation.Valid;
