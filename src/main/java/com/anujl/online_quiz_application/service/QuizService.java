@@ -63,22 +63,24 @@ throw new ResourceNotFoundException("No Quiz in the DB");
 
         Map<Long, QuestionEntity> questionMap = questions.stream()
                 .collect(Collectors.toMap(QuestionEntity::getId, q -> q));
-        int score = 0,i=0,totalMarks=0;
-List<Long> selectedOptions=requestResultDTO.getSelectedOptionIds();
-        for (Long questionId : requestResultDTO.getQuestionId()) {
-            QuestionEntity question = questionMap.get(questionId);
-
+        int score = 0,totalMarks=0;
+//List<Long> selectedOptions=requestResultDTO.getSelectedOptionIds();
+//        for (Long questionId : requestResultDTO.getQuestionId()) {
+//
+for(RequestResultDTO.AnswerDTO ans:requestResultDTO.getAnswers()){
+    System.out.println(ans.getSelectedOptionId()+ " "+ans.getQuestionId());
+    QuestionEntity question = questionMap.get(ans.getQuestionId());
 
             if (question == null) continue;
 
-
+System.out.println("asdf");
             Long correctOptionId = question.getOptions().stream()
                     .filter(OptionEntity::isCorrect)
                     .map(OptionEntity::getId).findFirst()
                     .orElseThrow(() -> new IllegalStateException("Question has no correct option"));
 
-
-            if(Objects.equals(correctOptionId, selectedOptions.get(i))){
+    System.out.println(correctOptionId +" "+ans.getSelectedOptionId());
+            if(Objects.equals(correctOptionId, ans.getSelectedOptionId())){
 score+=question.getPoints();
             }
             totalMarks+=question.getPoints();

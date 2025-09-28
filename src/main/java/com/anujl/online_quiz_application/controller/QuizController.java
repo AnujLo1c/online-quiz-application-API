@@ -32,7 +32,9 @@ public class QuizController {
     }
 
     @PostMapping("{quizId}/submit")
-    public ResponseEntity<ResponseResultDTO> getQuizScore(@PathVariable Long quizId,@Valid @RequestBody RequestResultDTO requestResultDTO){
+    public ResponseEntity<ResponseResultDTO> getQuizScore(
+            @PathVariable Long quizId,
+            @Valid @RequestBody RequestResultDTO requestResultDTO){
 return ResponseEntity.ok(quizService.getResult(quizId,requestResultDTO));
     }
 
