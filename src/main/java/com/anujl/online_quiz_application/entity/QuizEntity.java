@@ -1,5 +1,6 @@
 package com.anujl.online_quiz_application.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,6 @@ public class QuizEntity {
     private Long id;
     @Column(nullable = false)
     private String title;
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<QuestionEntity> questions = new ArrayList<>();
 }

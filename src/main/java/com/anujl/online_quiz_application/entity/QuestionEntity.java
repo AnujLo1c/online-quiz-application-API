@@ -1,6 +1,8 @@
 package com.anujl.online_quiz_application.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,10 +25,12 @@ public class QuestionEntity {
     @Column(nullable = false)
     private String text;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL,orphanRemoval = true)
+
     private List<OptionEntity> options = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")
+
     private QuizEntity quiz;
 }

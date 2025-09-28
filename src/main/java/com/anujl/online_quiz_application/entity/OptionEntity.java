@@ -1,5 +1,6 @@
 package com.anujl.online_quiz_application.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,5 +25,6 @@ public class OptionEntity {
 
     @ManyToOne
     @JoinColumn(name = "question_id")
+
     private QuestionEntity question;
 }
