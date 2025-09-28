@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class QuizService {
     private QuizRepository quizRepository;
 private QuestionRepository questionRepository;

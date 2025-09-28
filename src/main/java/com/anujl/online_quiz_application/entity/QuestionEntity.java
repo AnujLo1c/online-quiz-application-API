@@ -13,16 +13,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "question")
+@Table(name = "questions")
 public class QuestionEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
     private Integer points;
     @Column(nullable = false)
     private String text;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "questions", cascade = CascadeType.ALL)
     private List<OptionEntity> options = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private QuizEntity quiz;
 }

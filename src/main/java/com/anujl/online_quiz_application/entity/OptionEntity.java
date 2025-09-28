@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "options")
 public class OptionEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(nullable = false)

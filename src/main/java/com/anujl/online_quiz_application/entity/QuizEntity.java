@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name = "quiz")
 public class QuizEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
     private String title;
