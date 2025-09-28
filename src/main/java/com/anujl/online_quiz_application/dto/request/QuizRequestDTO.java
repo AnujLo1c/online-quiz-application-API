@@ -1,7 +1,6 @@
 package com.anujl.online_quiz_application.dto.request;
 
 
-import com.anujl.online_quiz_application.dto.response.QuestionRequestDTO;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuizResponseDTO {
-    private Long id;
+public class QuizRequestDTO {
     @NotBlank
     private String title;
 

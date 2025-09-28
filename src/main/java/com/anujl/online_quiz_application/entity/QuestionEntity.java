@@ -17,7 +17,8 @@ import java.util.List;
 public class QuestionEntity {
     @Id
     private Long id;
-
+    @Column(nullable = false)
+    private Integer points;
     @Column(nullable = false)
     private String text;
 

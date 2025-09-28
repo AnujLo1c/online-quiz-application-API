@@ -1,6 +1,6 @@
 package com.anujl.online_quiz_application.controller;
-import com.anujl.online_quiz_application.dto.request.QuestionResponseDTO;
-import com.anujl.online_quiz_application.dto.response.QuestionRequestDTO;
+import com.anujl.online_quiz_application.dto.response.QuestionResponseDTO;
+import com.anujl.online_quiz_application.dto.request.QuestionRequestDTO;
 import com.anujl.online_quiz_application.service.QuestionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

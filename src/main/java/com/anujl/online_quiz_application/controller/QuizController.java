@@ -1,7 +1,10 @@
 package com.anujl.online_quiz_application.controller;
 
-import com.anujl.online_quiz_application.dto.request.QuizResponseDTO;
-import com.anujl.online_quiz_application.dto.response.QuizRequestDTO;
+import com.anujl.online_quiz_application.dto.QuizSummaryDTO;
+import com.anujl.online_quiz_application.dto.response.QuizResponseDTO;
+import com.anujl.online_quiz_application.dto.request.RequestResultDTO;
+import com.anujl.online_quiz_application.dto.request.QuizRequestDTO;
+import com.anujl.online_quiz_application.dto.response.ResponseResultDTO;
 import com.anujl.online_quiz_application.service.QuizService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +27,13 @@ public class QuizController {
     }
 
     @GetMapping
-    public ResponseEntity<List<QuizResponseDTO>> getAllQuizzes() {
+    public ResponseEntity<List<QuizSummaryDTO>> getAllQuizzes() {
         return ResponseEntity.ok(quizService.getAllQuizzes());
     }
 
-    @PostMapping("submit")
-    public ResponseEntity<ResponseResultDTO> getQuizScore(@Valid @RequestBody RequestResultDTO requestResultDTO){
-return ResponseEntity.ok(quizService.getResult(requestResultDTO));
+    @PostMapping("{quizId}/submit")
+    public ResponseEntity<ResponseResultDTO> getQuizScore(@PathVariable Long quizId,@Valid @RequestBody RequestResultDTO requestResultDTO){
+return ResponseEntity.ok(quizService.getResult(quizId,requestResultDTO));
     }
 
 }
