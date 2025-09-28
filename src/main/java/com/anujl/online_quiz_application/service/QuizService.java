@@ -1,7 +1,9 @@
 package com.anujl.online_quiz_application.service;
 
 import com.anujl.online_quiz_application.dto.request.QuizResponseDTO;
+import com.anujl.online_quiz_application.dto.request.RequestResultDTO;
 import com.anujl.online_quiz_application.dto.response.QuizRequestDTO;
+import com.anujl.online_quiz_application.dto.response.ResponseResultDTO;
 import com.anujl.online_quiz_application.repository.QuizRepository;
 import jakarta.validation.Valid;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,6 @@ public class QuizService {
     }
 
 
+    public ResponseResultDTO getResult(RequestResultDTO requestResultDTO) {
+    }
 }
