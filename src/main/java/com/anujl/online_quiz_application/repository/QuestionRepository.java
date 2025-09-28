@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<QuizEntity, Long> {
+public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> {
     Optional<List<QuestionEntity>> findByQuizId(Long quizId);
 }

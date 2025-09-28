@@ -20,5 +20,5 @@ public class QuestionResponseDTO {
 
     private Integer points;
     @NotEmpty
-    private List<OptionRequestDTO> options=new ArrayList<>();
+    private List<OptionResponseDTO> options=new ArrayList<>();
 }

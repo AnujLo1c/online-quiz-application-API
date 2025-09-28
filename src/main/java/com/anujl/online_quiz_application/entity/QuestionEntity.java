@@ -23,6 +23,6 @@ public class QuestionEntity {
     private String text;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<OptionEntity> opitons = new ArrayList<>();
+    private List<OptionEntity> options = new ArrayList<>();
 
 }
