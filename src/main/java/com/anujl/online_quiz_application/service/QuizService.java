@@ -24,9 +24,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class QuizService {
-    private QuizRepository quizRepository;
-private QuestionRepository questionRepository;
-private ModelMapper modelMapper;
+  final   private QuizRepository quizRepository;
+
+  final private QuestionRepository questionRepository;
+final private ModelMapper modelMapper;
 
 
     public QuizResponseDTO createQuiz( QuizRequestDTO dto) {
@@ -63,8 +64,8 @@ throw new ResourceNotFoundException("No Quiz in the DB");
         Map<Long, QuestionEntity> questionMap = questions.stream()
                 .collect(Collectors.toMap(QuestionEntity::getId, q -> q));
         int score = 0,i=0,totalMarks=0;
-List<Long> selectedOptions=requestResultDTO.getSelectedOptionIDs();
-        for (Long questionId : requestResultDTO.getQuestionIDs()) {
+List<Long> selectedOptions=requestResultDTO.getSelectedOptionIds();
+        for (Long questionId : requestResultDTO.getQuestionId()) {
             QuestionEntity question = questionMap.get(questionId);
 
 

@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RequestResultDTO {
     @NotEmpty
-    private List<Long> questionIDs;
+    private List<Long> questionId;
     @NotEmpty
-    private List<Long> selectedOptionIDs;
+    private List<Long> selectedOptionIds;
 }
