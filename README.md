@@ -1,25 +1,26 @@
 # online-quiz-application-API
 
-This project is a robust, modular **RESTful API backend** for a modern online quiz and question mana[...]
-## Key Features ('
+This project is a robust, modular **RESTful API backend** for a modern online quiz and question management system.
 
-* **Question Management:** Supports the creation, retrieval, and validation of questions acros[...]
-* **Business Logic Validation:** Implements strict validation in the service layer to enforce ques[...]
-* **Quiz Scoring:** Provides a dedicated endpoint to receive user answers, calculate the final sco[...]
-* **Clean Architecture:** Follows a standard Controller-Service-Repository structure, ensuring hig[...]
-* **Technology Stack:** Leverages **Spring Boot 3** for rapid development and **PostgreSQL** for p[...]
+## Key Features
 
-## Technology Stack =����
+* **Question Management:** Supports the creation, retrieval, and validation of questions across various types.
+* **Business Logic Validation:** Implements strict validation in the service layer to enforce question and answer rules.
+* **Quiz Scoring:** Provides a dedicated endpoint to receive user answers, calculate the final score, and deliver results.
+* **Clean Architecture:** Follows a standard Controller-Service-Repository structure, ensuring high maintainability.
+* **Technology Stack:** Leverages **Spring Boot 3** for rapid development and **PostgreSQL** for persistence.
 
-| Category       | Technology                  |
-| :---           |:---------------------------|
-| **Backend Framework** | Spring Boot 3.5.6       |
-| **Persistence** | Spring Data JPA / Hibernate |
-| **Database**    | PostgreSQL                  |
-| **Build Tool**  | Maven / Gradle              |
-| **Language**    | Java 21+                    |
+## Technology Stack
 
-# Local Setup and Running Instructions =؀�
+| Category               | Technology                  |
+| :--------------------- | :--------------------------|
+| **Backend Framework**  | Spring Boot 3.5.6          |
+| **Persistence**        | Spring Data JPA / Hibernate|
+| **Database**           | PostgreSQL                 |
+| **Build Tool**         | Maven / Gradle             |
+| **Language**           | Java 21+                   |
+
+# Local Setup and Running Instructions
 
 Follow these steps to get the application running on your local machine.
 
@@ -27,11 +28,9 @@ Follow these steps to get the application running on your local machine.
 
 Ensure you have the following installed:
 
-1.  **Java Development Kit (JDK) 21+**
-2.  **Maven** (or Gradle)
-3.  **PostgreSQL Database Server** (running locally or accessible)
-
----
+1. **Java Development Kit (JDK) 21+**
+2. **Maven** (or Gradle)
+3. **PostgreSQL Database Server** (running locally or accessible)
 
 ---
 
@@ -129,7 +128,6 @@ This is the fastest way to run individual tests during development.
 - **Run a Single Test Class:** Open the test file (e.g., `QuestionServiceTest.java`), right-click the class name, and select **"Run 'QuestionServiceTest'"**.
 - **Run a Single Test Method:** Click the green arrow next to the specific `@Test` method you want to execute and select **"Run 'testMethodName()'"**.
 
-
 ## 📝 Assumptions & Design Choices
 
 ### **Assumptions**
@@ -145,5 +143,3 @@ This is the fastest way to run individual tests during development.
 - **Extensibility:** The modular structure allows new question types or features to be added easily.
 
 ---
-
-
