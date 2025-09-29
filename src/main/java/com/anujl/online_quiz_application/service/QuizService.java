@@ -8,10 +8,12 @@ import com.anujl.online_quiz_application.dto.request.QuizRequestDTO;
 import com.anujl.online_quiz_application.dto.response.ResponseResultDTO;
 import com.anujl.online_quiz_application.entity.OptionEntity;
 import com.anujl.online_quiz_application.entity.QuestionEntity;
+import com.anujl.online_quiz_application.entity.QuestionType;
 import com.anujl.online_quiz_application.entity.QuizEntity;
 import com.anujl.online_quiz_application.exception.custom.ResourceNotFoundException;
 import com.anujl.online_quiz_application.repository.QuestionRepository;
 import com.anujl.online_quiz_application.repository.QuizRepository;
+import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
@@ -50,10 +52,10 @@ throw new ResourceNotFoundException("No Quiz in the DB");
 
     }
 
-
+@Transactional
     public ResponseResultDTO getResult(Long quizId, RequestResultDTO requestResultDTO) {
 
-
+        int score = 0,totalMarks=0;
         QuizEntity quiz = quizRepository.findById(quizId)
                 .orElseThrow(() -> new ResourceNotFoundException("Quiz not found"));
 
@@ -61,32 +63,49 @@ throw new ResourceNotFoundException("No Quiz in the DB");
         List<QuestionEntity> questions = questionRepository.findByQuizId(quizId)
                 .orElseThrow(() -> new ResourceNotFoundException("No questions found for this quiz"));
 
-        Map<Long, QuestionEntity> questionMap = questions.stream()
-                .collect(Collectors.toMap(QuestionEntity::getId, q -> q));
-        int score = 0,totalMarks=0;
-//List<Long> selectedOptions=requestResultDTO.getSelectedOptionIds();
-//        for (Long questionId : requestResultDTO.getQuestionId()) {
-//
-for(RequestResultDTO.AnswerDTO ans:requestResultDTO.getAnswers()){
-    System.out.println(ans.getSelectedOptionId()+ " "+ans.getQuestionId());
-    QuestionEntity question = questionMap.get(ans.getQuestionId());
+        Map<Long, RequestResultDTO.AnswerDTO> userAnswers = requestResultDTO.getAnswers().stream()
+                .collect(Collectors.toMap(RequestResultDTO.AnswerDTO::getQuestionId, q -> q));
 
-            if (question == null) continue;
-
-System.out.println("asdf");
-            Long correctOptionId = question.getOptions().stream()
-                    .filter(OptionEntity::isCorrect)
-                    .map(OptionEntity::getId).findFirst()
-                    .orElseThrow(() -> new IllegalStateException("Question has no correct option"));
-
-    System.out.println(correctOptionId +" "+ans.getSelectedOptionId());
-            if(Objects.equals(correctOptionId, ans.getSelectedOptionId())){
-score+=question.getPoints();
+        for(QuestionEntity entity:questions) {
+            totalMarks += entity.getPoints();
+            RequestResultDTO.AnswerDTO currAns = userAnswers.get(entity.getId());
+            if (currAns == null) {
+                continue;
             }
-            totalMarks+=question.getPoints();
+            switch (entity.getType()) {
+                case TEXT -> {
+                    String ans = currAns.getAnswerText();
+                    if (ans == null || ans.isBlank()) {
+                        continue;
+                    }
+                    score += entity.getPoints();
+                }
+                case SINGLE_CHOICE -> {
+
+                    Long correctOptionId = entity.getOptions().stream()
+                            .filter(OptionEntity::isCorrect)
+                            .map(OptionEntity::getId).findFirst()
+                            .orElseThrow(() -> new IllegalStateException("Question has no correct option"));
+                    if (Objects.equals(currAns.getSelectedOptionId().getFirst(), correctOptionId)) {
+                        score += entity.getPoints();
+                    }
+                }
+                case MULTIPLE_CHOICE -> {
+                    List<Long> correctOptionIds = entity.getOptions().stream()
+                            .filter(OptionEntity::isCorrect)
+                            .map(OptionEntity::getId).toList();
+                    List<Long> selectedOptions=currAns.getSelectedOptionId();
+                    int correct=0, totalCorrectOptions=correctOptionIds.size();
+                    for(Long selectedId:selectedOptions){
+                        if(correctOptionIds.contains(selectedId)){
+                            correct++;
+                        }
+                    }
+                    score+=entity.getPoints()*(correct/totalCorrectOptions);
+                }
+                default -> throw new IllegalArgumentException("Unknown question type.");
+            }
         }
-
-
         return new ResponseResultDTO(score,totalMarks);
     }
 

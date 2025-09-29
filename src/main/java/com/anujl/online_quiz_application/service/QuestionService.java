@@ -6,6 +6,7 @@ import com.anujl.online_quiz_application.dto.response.QuestionResponseDTO;
 import com.anujl.online_quiz_application.dto.request.QuestionRequestDTO;
 import com.anujl.online_quiz_application.entity.OptionEntity;
 import com.anujl.online_quiz_application.entity.QuestionEntity;
+import com.anujl.online_quiz_application.entity.QuestionType;
 import com.anujl.online_quiz_application.entity.QuizEntity;
 import com.anujl.online_quiz_application.exception.custom.ResourceNotFoundException;
 import com.anujl.online_quiz_application.repository.QuestionRepository;
@@ -39,21 +40,22 @@ public class QuestionService {
 
         QuestionEntity question = modelMapper.map(dto, QuestionEntity.class);
         question.setQuiz(quiz);
-
-        List<OptionEntity> options = new ArrayList<>();
-        for (OptionRequestDTO optDto : dto.getOptions()) {
-            OptionEntity option = modelMapper.map(optDto, OptionEntity.class);
-            option.setQuestion(question); // set question before adding
-            options.add(option);
-        }
-        question.setOptions(options);
+      if(dto.getType()!= QuestionType.TEXT) {
+          List<OptionEntity> options = new ArrayList<>();
+          for (OptionRequestDTO optDto : dto.getOptions()) {
+              OptionEntity option = modelMapper.map(optDto, OptionEntity.class);
+              option.setQuestion(question);
+              options.add(option);
+          }
+          question.setOptions(options);
+      }
         QuestionEntity savedQuestion = questionRepository.save(question);
-
         QuestionResponseDTO response = modelMapper.map(savedQuestion, QuestionResponseDTO.class);
-        response.setOptions(savedQuestion.getOptions().stream()
-                .map(opt -> modelMapper.map(opt, OptionResponseDTO.class))
-                .toList());
-
+        if(response.getType()!= QuestionType.TEXT){
+            response.setOptions(savedQuestion.getOptions().stream()
+                    .map(opt -> modelMapper.map(opt, OptionResponseDTO.class))
+                    .toList());
+        }
         return response;
     }
 
@@ -63,13 +65,16 @@ public class QuestionService {
                 .orElseThrow(() -> new ResourceNotFoundException("No questions found for this quiz"));
         return questions.stream().map(question -> {
             QuestionResponseDTO dto = modelMapper.map(question, QuestionResponseDTO.class);
+            if(dto.getType()!=QuestionType.TEXT){
             dto.setOptions(question.getOptions().stream()
                     .map(opt ->
                          modelMapper.map(opt, OptionResponseDTO.class)
 
 
                     ).toList());
+            }
             return dto;
         }).toList();
-    }
+
+        }
 }

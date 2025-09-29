@@ -25,8 +25,16 @@ public class QuestionEntity {
     @Column(nullable = false)
     private String text;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL,orphanRemoval = true)
+    //add-ons
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private QuestionType type;
 
+//    @Column(length = 300)
+//    private String answerText;
+    //
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<OptionEntity> options = new ArrayList<>();
 
     @ManyToOne
