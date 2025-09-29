@@ -49,12 +49,18 @@ public class QuestionService {
           }
           question.setOptions(options);
       }
+      else{
+          question.setOptions(null);
+      }
         QuestionEntity savedQuestion = questionRepository.save(question);
         QuestionResponseDTO response = modelMapper.map(savedQuestion, QuestionResponseDTO.class);
         if(response.getType()!= QuestionType.TEXT){
             response.setOptions(savedQuestion.getOptions().stream()
                     .map(opt -> modelMapper.map(opt, OptionResponseDTO.class))
                     .toList());
+        }
+        else{
+            response.setOptions(null);
         }
         return response;
     }

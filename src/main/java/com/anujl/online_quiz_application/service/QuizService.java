@@ -101,7 +101,7 @@ throw new ResourceNotFoundException("No Quiz in the DB");
                             correct++;
                         }
                     }
-                    score+=entity.getPoints()*(correct/totalCorrectOptions);
+                    score+= (int) (entity.getPoints()*((double)correct/totalCorrectOptions));
                 }
                 default -> throw new IllegalArgumentException("Unknown question type.");
             }
