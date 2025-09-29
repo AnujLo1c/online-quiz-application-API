@@ -1,5 +1,4 @@
-
-��# online-quiz-application-API
+# online-quiz-application-API
 
 This project is a robust, modular **RESTful API backend** for a modern online quiz and question mana[...]
 ## Key Features ('
@@ -146,4 +145,5 @@ This is the fastest way to run individual tests during development.
 - **Extensibility:** The modular structure allows new question types or features to be added easily.
 
 ---
+
 
