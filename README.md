@@ -128,6 +128,333 @@ This is the fastest way to run individual tests during development.
 - **Run a Single Test Class:** Open the test file (e.g., `QuestionServiceTest.java`), right-click the class name, and select **"Run 'QuestionServiceTest'"**.
 - **Run a Single Test Method:** Click the green arrow next to the specific `@Test` method you want to execute and select **"Run 'testMethodName()'"**.
 
+## 🗃️ Postman Collection Example (`Online Quiz API.postman_collection.json`)
+
+You can use the following Postman collection file to quickly set up and test API endpoints.
+Save this as `Online Quiz API.postman_collection.json` in your project root or import it directly into Postman.
+
+```json
+{
+	"info": {
+		"_postman_id": "45794196-a679-498d-a230-05cecb0eb46f",
+		"name": "Online Quiz API",
+		"description": "Postman collection for Online Quiz Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36644025",
+		"_collection_link": "https://aman66-1100.postman.co/workspace/Aman~a2f22306-097d-44b4-8946-e89b169d4997/collection/36644025-45794196-a679-498d-a230-05cecb0eb46f?action=share&source=collection_link&creator=36644025"
+	},
+	"item": [
+		{
+			"name": "Create Quiz",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Java Basics Quiz 2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/quiz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Quizzes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/quiz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Question to Quiz",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/quiz/1/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"quiz",
+						"1",
+						"questions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "single",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Which of these is a programming language?\",\n   \"points\": 5,\n   \"type\": \"SINGLE_CHOICE\",\n   \"options\": [\n     {\n       \"text\": \"HTML\",\n       \"correct\": false\n    },\n     {\n       \"text\": \"Python\",\n      \"correct\": true     },\n     {\n       \"text\": \"CSS\",\n      \"correct\": false\n     }\n   ]\n    }\n\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/quiz/1/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quiz",
+								"1",
+								"questions"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Multiple",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n\n {\n   \"text\": \"Select all backend technologies:\",\n   \"points\": 10,\n   \"type\": \"MULTIPLE_CHOICE\",\n   \"options\": [\n     {\n       \"text\": \"React\",\n       \"correct\": false\n     },\n    {\n       \"text\": \"Spring Boot\",\n       \"correct\": true     },\n     {\n       \"text\": \"Node.js\",\n       \"correct\": true\n     }\n   ]\n }\n\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/quiz/1/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quiz",
+								"1",
+								"questions"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "text",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n\n\n{\n  \"text\": \"Explain the concept of Dependency Injection in 300 words or less.\",\n  \"points\": 20,\n  \"type\": \"TEXT\",\n  \"options\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/quiz/1/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quiz",
+								"1",
+								"questions"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get Questions for Quiz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/quiz/1/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"quiz",
+						"1",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Quiz & Get Score",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"answers\": [\n    {\"questionId\": 1, \"selectedOptionId\": [2]},\n    {\"questionId\": 2, \"selectedOptionId\": [1,2]},\n    {\"questionId\": 3, \"textAnswer\": \"temp answer for testing\"}\n\n  ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/quiz/1/submit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"quiz",
+						"1",
+						"submit"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Correct answers",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"answers\": [\n    {\"questionId\": 1, \"selectedOptionId\": [2]},\n    {\"questionId\": 2, \"selectedOptionId\": [5,6]},\n    {\"questionId\": 3, \"answerText\": \"temp answer for testing\"}\n\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/quiz/1/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quiz",
+								"1",
+								"submit"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Wrong answers",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"answers\": [\n    {\"questionId\": 1, \"selectedOptionId\": [1]},\n    {\"questionId\": 2, \"selectedOptionId\": [1,2]},\n    {\"questionId\": 3, \"answerText\": \"\"}\n\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/quiz/1/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"quiz",
+								"1",
+								"submit"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
+```
+
+---
+
 ## 📝 Assumptions & Design Choices
 
 ### **Assumptions**
